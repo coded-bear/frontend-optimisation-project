@@ -63,7 +63,7 @@ gulp.task('sass', (cb) => {
     src_assets_folder + 'sass/**/*.sass',
     src_assets_folder + 'scss/**/*.scss'
   ])
-  .pipe(sass().on('error', sass.logError))
+  .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
   .pipe(gulp.dest(dist_assets_folder + 'css'));
 
   cb();
@@ -188,17 +188,17 @@ gulp.task(
   'build', 
   gulp.series(
     'clear', 
-    'html', /* replace the 'html' with 'html-minified' if you need minification */ 
+    'html-minified', /* replace the 'html' with 'html-minified' if you need minification */ 
     'sass', 
     'js', 
-    'js-copy', /* replace the 'js-copy' with 'js-minified' if you need minification */
+    'js-minified', /* replace the 'js-copy' with 'js-minified' if you need minification */
     'fonts', 
     'videos',
     'extra-files', 
     'images', 
-    /*'purgecss',*/
-    /*'generate-critical-css',*/
-    /*'generate-service-worker',*/
+    'purgecss',
+    // 'generate-critical-css',
+    'generate-service-worker',
   )
 );
 
